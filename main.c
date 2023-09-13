@@ -1,13 +1,12 @@
 #include "main.h"
 
 /**
- * main - main function
+ * main - reads a line, splits it and executes the command
  *
- * Return: 0 success
+ * Return : zero on success and -1 on failure
  */
 
-int main(void)
-{
+int main(int ac, char **argv){
 	char *prompt = "$ ";
 	char *line = NULL, *line_copy = NULL;
 	size_t size = 0;
