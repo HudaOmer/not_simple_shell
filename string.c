@@ -17,3 +17,20 @@ int _strlen(char *s)
 	return (count);
 
 }
+
+/**
+ * printarrat - prints an array of chars
+ * @array: to print
+ * Return: void
+ */
+void printarray(char **array)
+{
+	size_t i = 0;
+
+	printf("\"%s\"", array[i++]);
+	while (array[i])
+	{
+		printf(", \"%s\"", array[i++]);
+	}
+	printf("\n");
+}
