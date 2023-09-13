@@ -1,52 +1,70 @@
 #include "main.h"
 
 /**
- * printarrat - prints an array of chars
- * @array: to print
- * Return: void
- */
-void printarray(char **array)
-{
-	size_t i = 0;
-
-	printf("\"%s\"", array[i++]);
-	while (array[i])
-	{
-		printf(", \"%s\"", array[i++]);
-	}
-	printf("\n");
-}
-
-/**
- * main - main function
+ * main - reads a line, splits it and executes the command
  *
- * Return: 0 success
+ * Return : zero on success and -1 on failure
  */
 
-int main(void)
-{
-	size_t i = 1, buffersize;
-	long int chs;
-	char string[] = "Hello world today is a new day";
-	char **array, *buffer, prompt[] = "#cisfun$ ";
+int main(int ac, char **argv){
+	char *prompt = "$ ";
+	char *line = NULL, *line_copy = NULL;
+	size_t size = 0;
+	ssize_t chars_read;
+	const char *del = " \n";
+	int tokens = 0;
+	char *token;
+	int i;
+	(void)ac;
 
-	array = split(string);
-	printarray(array);
-
-	while (i)
+	while (1) 
 	{
 		printf("%s", prompt);
-		chs = getline(&buffer, &buffersize, stdin);
-		if (chs == -1)
+		chars_read = getline(&line, &size, stdin);
+
+		if (chars_read == -1)
 		{
-			printf("Error: getline()");
+			printf("\n");
+			 return (-1);
+		}
+
+		line_copy = malloc(sizeof(char) * chars_read);
+		if (line_copy == NULL)
+		{
+			perror("tsh: memory allocation error");
 			return (-1);
 		}
-		buffer[_strlen(buffer) - 1] = '\0';
-		array = split(buffer);
-		printf("%s\n", buffer);
-		printarray(array);
-	}
+
+		strcpy(line_copy, line);
+
+		token = strtok(line, del);
+
+		while (token != NULL)
+		{
+			tokens++;
+			token = strtok(NULL, del);
+		}
+		tokens++;
+
+		argv = malloc(sizeof(char *) * tokens);
+
+		token = strtok(line_copy, del);
+
+		for (i = 0; token != NULL; i++)
+		{
+			argv[i] = malloc(sizeof(char) * strlen(token));
+			strcpy(argv[i], token);
+			token = strtok(NULL, del);
+		}
+		argv[i] = NULL;
+		/* execute the command */
+		execute(argv);
+	} 
+
+
+	/* free up allocated memory */ 
+	free(line_copy);
+	free(line);
 
 	return (0);
 }
