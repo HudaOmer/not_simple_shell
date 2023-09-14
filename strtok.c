@@ -6,8 +6,8 @@
  * @delim: delim
  * Return: words separated
  */
-char *_strtok(char *string, const char *delim)
+/*char *_strtok(char *string, const char *delim)
 {
 	char *token;
 
-}
+}*/

@@ -3,7 +3,7 @@
 /**
  * _strlen - return length of a string
  * @s: points to array of chars
- * Descripyion: does the job
+ * Description: does the job
  *
  * Return: the length
  */
@@ -19,7 +19,7 @@ int _strlen(char *s)
 }
 
 /**
- * printarrat - prints an array of chars
+ * printarray - prints an array of chars
  * @array: to print
  * Return: void
  */

@@ -2,25 +2,25 @@
 
 /**
  * execute - function to fork, execute and wait
- *
+ * @argv: Argument Vector
  * Return : Nothing on success, -1 on faliure.
  */
 void execute(char **argv)
 {
 	char *command = NULL, *actual_command = NULL;
 	pid_t child_pid;
-	int status; 
+	int status;
 
-	if(argv)
-	{ 
+	if (argv)
+	{
 		child_pid = fork();
-		if(child_pid == -1)
+		if (child_pid == -1)
 		{
 			perror("Error");
 		}
 		else
 		{
-			if(child_pid == 0)
+			if (child_pid == 0)
 			{
 
 				command = argv[0];

@@ -2,30 +2,32 @@
 
 /**
  * main - reads a line, splits it and executes the command
- *
+ * @ac: Argument Count
+ * @argv: Argument Vector
  * Return : zero on success and -1 on failure
  */
 
-int main(int ac, char **argv){
-	char *prompt = "$ ";
-	char *line = NULL, *line_copy = NULL;
+int main(int ac, char **argv)
+{
+	char *prompt = "$ ",*line = NULL, *line_copy = NULL;
 	size_t size = 0;
 	ssize_t chars_read;
 	const char *del = " \n";
-	int tokens = 0;
+	int tokens = 0, i, isarg = ac;
 	char *token;
-	int i;
 	(void)ac;
 
 	while (1) 
 	{
-		printf("%s", prompt);
+		if (isarg == 1)
+			printf("%s", prompt);
 		chars_read = getline(&line, &size, stdin);
 
 		if (chars_read == -1)
 		{
-			printf("\n");
-			 return (-1);
+			if (isarg != 1)
+				return (0);
+			return(-1);
 		}
 
 		line_copy = malloc(sizeof(char) * chars_read);

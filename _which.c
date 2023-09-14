@@ -1,18 +1,14 @@
 #include "main.h"
 
 /**
- *  * _which - locates a command
- *   *
- *    * Return : command location
- *     */
-char *_which(char*command)
+ * _which - locates a command
+ * @command: command
+ * Return: command location
+ */
+char *_which(char *command)
 {
-	char *path;
-	char *path_copy;
-	char *path_token;
-	char *file_path;
-	int command_length;
-	int directory_length;
+	char *path, *path_copy, *path_token, *file_path;
+	int command_length, directory_length;
 	struct stat buffer;
 
 	path = getenv("PATH");
@@ -21,7 +17,7 @@ char *_which(char*command)
 		path_copy = strdup(path);
 		command_length = strlen(command);
 		path_token = strtok(path_copy, ":");
-		while(path_token != NULL)
+		while (path_token != NULL)
 		{
 			directory_length = strlen(path_token);
 			file_path = malloc(command_length + directory_length + 2);
@@ -33,7 +29,7 @@ char *_which(char*command)
 			if (stat(file_path, &buffer) == 0)
 			{
 				free(path_copy);
-				return(file_path);
+				return (file_path);
 			}
 			else
 			{
@@ -42,11 +38,11 @@ char *_which(char*command)
 			}
 		}
 		free(path_copy);
-		if(stat(command, &buffer) == 0)
+		if (stat(command, &buffer) == 0)
 		{
-			return(command);
+			return (command);
 		}
-		return(NULL);
+		return (NULL);
 	}
-	return(NULL);
+	return (NULL);
 }
