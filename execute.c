@@ -9,34 +9,40 @@ void execute(char **argv)
 {
 	char *command = NULL, *actual_command = NULL;
 	pid_t child_pid;
-	int status; 
+	int status;
+	extern char **environ;	
 
 	if(argv)
-	{ 
-		child_pid = fork();
-		if(child_pid == -1)
+	{
+		command = argv[0];
+		actual_command = _which(command);
+		if(actual_command == NULL)
 		{
-			perror("Error");
+			printf("%s: not found\n", argv[0]);
 		}
 		else
 		{
-			if(child_pid == 0)
+			child_pid = fork();
+			if(child_pid == -1)
 			{
-
-				command = argv[0];
-
-				actual_command = _which(command);
-				if (execve(actual_command, argv, NULL) == -1)
-				{
-					printf("$0 :%s: not found\n", argv[0]);
-				};
+				perror("Error");
 			}
 			else
 			{
-				wait(&status);
+				if(child_pid == 0)
+				{
+
+					if (execve(actual_command, argv, environ) == -1)
+					{
+						printf("$0 :%s: not found\n", argv[0]);
+					};
+				}
+				else
+				{
+					wait(&status);
+				}
 			}
 		}
-
 	}
 
 }
