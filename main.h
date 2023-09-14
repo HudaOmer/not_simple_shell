@@ -18,4 +18,6 @@ void execute(char **argv);
 
 char *_which(char *command);
 
+int env(void);
+
 #endif
