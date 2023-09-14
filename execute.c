@@ -3,9 +3,10 @@
 /**
  * execute - function to fork, execute and wait
  * @argv: Argument Vector
+ * @file_name: name of the file
  * Return : Nothing on success, -1 on faliure.
  */
-void execute(char **argv)
+void execute(char **argv, char *file_name)
 {
 	char *command = NULL, *actual_command = NULL;
 	pid_t child_pid;
@@ -18,7 +19,7 @@ void execute(char **argv)
 		actual_command = _which(command);
 		if(actual_command == NULL)
 		{
-			printf("%s: not found\n", argv[0]);
+			printf("%s :%s: not found\n", file_name, argv[0]);
 		}
 		else
 		{
@@ -34,7 +35,7 @@ void execute(char **argv)
 
 					if (execve(actual_command, argv, environ) == -1)
 					{
-						printf("$0 :%s: not found\n", argv[0]);
+						printf("%s :%s: not found\n", file_name, argv[0]);
 					};
 				}
 				else

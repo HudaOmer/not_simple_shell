@@ -9,25 +9,21 @@
 
 int main(int ac, char **argv)
 {
-	char *prompt = "$ ",*line = NULL, *line_copy = NULL;
+	char __attribute__((unused)) *prompt = "$ ",*line = NULL, *line_copy = NULL;
 	size_t size = 0;
 	ssize_t chars_read;
 	const char *del = " \n";
-	int tokens = 0, i, isarg = ac;
-	char *token;
+	int tokens = 0, i;
+	char *token, *file_name = argv[0];
 	(void)ac;
 
 	while (1) 
 	{
-		if (isarg == 1)
-			printf("%s", prompt);
 		chars_read = getline(&line, &size, stdin);
 
 		if (chars_read == -1)
 		{
-			if (isarg != 1)
-				return (0);
-			return(-1);
+			return (0);
 		}
 
 		line_copy = malloc(sizeof(char) * chars_read);
@@ -60,7 +56,7 @@ int main(int ac, char **argv)
 		}
 		argv[i] = NULL;
 		/* execute the command */
-		execute(argv);
+		execute(argv, file_name);
 	} 
 
 

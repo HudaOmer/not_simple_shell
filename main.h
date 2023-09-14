@@ -14,7 +14,7 @@ void printarray(char **array);
 
 char **split(char *string);
 
-void execute(char **argv);
+void execute(char **argv, char *file_name);
 
 char *_which(char *command);
 
