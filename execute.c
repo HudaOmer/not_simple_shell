@@ -19,7 +19,7 @@ void execute(char **argv, char *file_name)
 		actual_command = _which(command);
 		if(actual_command == NULL)
 		{
-			printf("%s :%s: not found\n", file_name, argv[0]);
+			printf("%s: %s: not found\n", file_name, argv[0]);
 		}
 		else
 		{
@@ -35,7 +35,7 @@ void execute(char **argv, char *file_name)
 
 					if (execve(actual_command, argv, environ) == -1)
 					{
-						printf("%s :%s: not found\n", file_name, argv[0]);
+						printf("%s: %s: not found\n", file_name, argv[0]);
 					};
 				}
 				else
