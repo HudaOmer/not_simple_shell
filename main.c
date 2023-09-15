@@ -9,7 +9,7 @@
 
 int main(int ac, char **argv)
 {
-	char *prompt = "$ ",*line = NULL, *line_copy = NULL;
+	char __attribute__((unused)) *prompt = "$ ",*line = NULL, *line_copy = NULL;
 	size_t size = 0;
 	ssize_t chars_read;
 	const char *del = " \n";
@@ -19,14 +19,21 @@ int main(int ac, char **argv)
 
 	while (1) 
 	{
-		printf("%s", prompt);
+		/* if (isatty(STDIN_FILENO)) */
+		write(STDOUT_FILENO, "$", 1);
 		chars_read = getline(&line, &size, stdin);
 
 		if (chars_read == -1)
 		{
-			return (0);
+			if (isatty(STDIN_FILENO))
+			{
+				write(STDOUT_FILENO, "\n", 1);
+				/*free(line);*/
+			}
+			exit(0);
 		}
 
+		_exit_shell(line);
 		line_copy = malloc(sizeof(char) * chars_read);
 		if (line_copy == NULL)
 		{
