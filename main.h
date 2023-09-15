@@ -16,6 +16,9 @@ char _startwith(const char *string, const char *substring);
 char *_strcat(char *dest, char *src);
 void printarray(char **array);
 
+/* string_2.c functions */
+
+
 char **split(char *string);
 
 void execute(char **argv, char *file_name);
