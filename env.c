@@ -10,12 +10,12 @@ int env(void)
 	unsigned int i;
 	extern char **environ;
 
-        i = 0;
+	i = 0;
 	while (environ[i] != NULL)
 	{
 		printf("%s\n", environ[i]);
 		i++;
 	}
 
-	return(0);
+	return (0);
 }

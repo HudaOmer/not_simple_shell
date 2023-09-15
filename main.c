@@ -4,12 +4,12 @@
  * main - reads a line, splits it and executes the command
  * @ac: Argument Count
  * @argv: Argument Vector
- * Return : zero on success and -1 on failure
+ * Return: zero on success and -1 on failure
  */
 
 int main(int ac, char **argv)
 {
-	char __attribute__((unused)) *prompt = "$ ",*line = NULL, *line_copy = NULL;
+	char *prompt = "$ ",*line = NULL, *line_copy = NULL;
 	size_t size = 0;
 	ssize_t chars_read;
 	const char *del = " \n";
@@ -19,6 +19,7 @@ int main(int ac, char **argv)
 
 	while (1) 
 	{
+		printf("%s", prompt);
 		chars_read = getline(&line, &size, stdin);
 
 		if (chars_read == -1)
