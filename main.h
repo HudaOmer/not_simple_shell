@@ -17,7 +17,30 @@ char *_strcat(char *dest, char *src);
 void printarray(char **array);
 
 /* string_2.c functions */
+char *_strcpy(char *dest, const char *src);
+char *_strdup(const char *);
+void _puts(char *);
+int _putchar(char);
 
+/* string_3.c functions */
+
+
+
+
+/**
+ * struct built_in - list of builtins
+ * @bi: The specifier
+ * @f: The function associated with printing
+ */
+typedef struct built_in
+{
+	char *bi;
+	int (*f)();
+} builtin_t;
+
+
+
+extern char **environ;
 
 char **split(char *string);
 

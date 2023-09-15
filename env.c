@@ -8,7 +8,6 @@
 int env(void)
 {
 	unsigned int i;
-	extern char **environ;
 
 	i = 0;
 	while (environ[i] != NULL)

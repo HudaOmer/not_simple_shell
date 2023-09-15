@@ -9,18 +9,19 @@
 
 int main(int ac, char **argv)
 {
-	char __attribute__((unused)) *prompt = "$ ",*line = NULL, *line_copy = NULL;
+	char __attribute__((unused)) *prompt = "$ ", *line = NULL, *line_copy = NULL;
 	size_t size = 0;
 	ssize_t chars_read;
 	const char *del = " \n";
 	int tokens = 0, i;
 	char *token, *file_name = argv[0];
 	(void)ac;
+	
 
-	while (1) 
+	while (1)
 	{
 		/* if (isatty(STDIN_FILENO)) */
-		write(STDOUT_FILENO, "$", 1);
+		write(STDOUT_FILENO, "$ ", 2);
 		chars_read = getline(&line, &size, stdin);
 
 		if (chars_read == -1)
@@ -33,7 +34,6 @@ int main(int ac, char **argv)
 			exit(0);
 		}
 
-		_exit_shell(line);
 		line_copy = malloc(sizeof(char) * chars_read);
 		if (line_copy == NULL)
 		{
@@ -41,7 +41,7 @@ int main(int ac, char **argv)
 			return (-1);
 		}
 
-		strcpy(line_copy, line);
+		_strcpy(line_copy, line);
 
 		token = strtok(line, del);
 
@@ -59,16 +59,31 @@ int main(int ac, char **argv)
 		for (i = 0; token != NULL; i++)
 		{
 			argv[i] = malloc(sizeof(char) * strlen(token));
-			strcpy(argv[i], token);
+			_strcpy(argv[i], token);
 			token = strtok(NULL, del);
 		}
 		argv[i] = NULL;
-		/* execute the command */
-		execute(argv, file_name);
-	} 
+		/* Check if the enterd command is a built-in*/
+		if (strcmp(argv[0], "exit") == 0)
+		{
+			exit(0);
+		}
+		else
+		{
+			if (strcmp(argv[0], "env") == -1)
+			{
+				env();
+			}
+			else
+			{
+			/* execute the command */
+			execute(argv, file_name);
+			}
+		}
+	}
 
 
-	/* free up allocated memory */ 
+	/* free up allocated memory */
 	free(line_copy);
 	free(line);
 
