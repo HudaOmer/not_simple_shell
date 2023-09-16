@@ -8,6 +8,8 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
+#include <stdbool.h>
+
 
 /* string.c functions */
 int _strlen(char *s);
@@ -34,18 +36,18 @@ int _putchar(char);
  */
 typedef struct built_in
 {
-	char *bi;
+	char *name;
 	int (*f)();
 } builtin_t;
 
-
+void is_builtin(char **argv, char *fn);
 
 extern char **environ;
 
 char **split(char *string);
 
 void execute(char **argv, char *file_name);
-void _exit_shell(char **argv, char *fn);
+int _exit_shell(void);
 char *_which(char *command);
 
 int env(void);

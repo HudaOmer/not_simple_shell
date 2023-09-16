@@ -48,7 +48,7 @@ int main(int __attribute__((unused)) ac, char **argv)
 			token = strtok(NULL, del);
 		}
 		argv[i] = NULL;/* Check if the enterd command is a built-in*/
-		_exit_shell(argv, file_name);
+		is_builtin(argv, file_name);
 	} /* free up allocated memory */
 	free(line_copy), free(line);
 	return (0);
