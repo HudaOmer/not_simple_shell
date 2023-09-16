@@ -9,8 +9,9 @@
 void is_builtin(char **argv, char *fn)
 {
 	builtin_t builtin[] = {
-		/*{ "env", env },*/
-		{ "exit", _exit_shell },
+		/*{ "env", env },
+		{ "exit", _exit_shell },*/
+		{ "setenv", _setenv},
 		{ NULL, NULL }
 	};
 	int i;

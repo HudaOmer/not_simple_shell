@@ -50,6 +50,9 @@ void execute(char **argv, char *file_name);
 int _exit_shell(void);
 char *_which(char *command);
 
+/* env.c functions */
 int env(void);
+int set_env(char *name, char *value, int overwite);
+int _setenv(char **argv);
 
 #endif
