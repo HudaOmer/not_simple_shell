@@ -11,7 +11,6 @@ void execute(char **argv, char *file_name)
 	char *command = NULL, *actual_command = NULL;
 	pid_t child_pid;
 	int status;
-	extern char **environ;
 
 	if (argv)
 	{

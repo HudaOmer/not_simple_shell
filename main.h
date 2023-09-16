@@ -45,8 +45,7 @@ extern char **environ;
 char **split(char *string);
 
 void execute(char **argv, char *file_name);
-void _exit_shell(char *line);
-
+void _exit_shell(char **argv, char *fn);
 char *_which(char *command);
 
 int env(void);

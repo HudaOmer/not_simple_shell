@@ -2,27 +2,26 @@
 
 /**
  * _exit_shell - exits the shell
- * @line: to compare
+ * @argv: Argument Vector
+ * @fn: file_name
  * Return: void
  */
-void _exit_shell(char *line)
+void _exit_shell(char **argv, char *fn)
 {
-	char *ext = "exit ";
-	int i, isequal = 0;
-
-
-	for (i = 0; ext[i]; i++)
+	if (_strcmp(argv[0], "exit") == 0)
 	{
-		if (ext[i] == line[i])
-			;
+		exit(0);
+	}
+	else
+	{
+		if (_strcmp(argv[0], "env") == -1)
+		{
+			env();
+		}
 		else
 		{
-			isequal = 1;
-			break;
+		/* execute the command */
+		execute(argv, fn);
 		}
-		ext++;
-		line++;
 	}
-	if (isequal == 0)
-		return;
 }
