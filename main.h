@@ -12,7 +12,7 @@
 /* string.c functions */
 int _strlen(char *s);
 int _strcmp(char *s1, char *s2);
-char _startwith(const char *string, const char *substring);
+char *_startwith(const char *string, const char *substring);
 char *_strcat(char *dest, char *src);
 void printarray(char **array);
 

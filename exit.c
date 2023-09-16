@@ -17,12 +17,12 @@ void _exit_shell(char *line)
 			;
 		else
 		{
-			i = 1;
+			isequal = 1;
 			break;
 		}
 		ext++;
 		line++;
 	}
-	if (i == 0)
+	if (isequal == 0)
 		return;
 }

@@ -24,15 +24,14 @@ char *_strcpy(char *dest, const char *src)
 	dest[i] = '\0';
 
 	return (dest);
+}
 
-/*
-**
+/**
  * _strdup - copies array content
  * @str: string to be copied
  * Return: NULL or the allocated array
  */
-
-char *_strdup(char *str)
+char *_strdup(const char *str)
 {
 	unsigned int i = 0, size = 0;
 	char *s;
@@ -78,12 +77,13 @@ void _puts(char *str)
 /**
  * _putchar - writes the character c to stdout
  * @c: The character to print
- *
  * Return: On success 1.
  * On error, -1 is returned, and errno is set appropriately.
  */
 int _putchar(char c)
 {
-	return (write(1, &c, 1));
-}
+	int x;
 
+	x = write(1, &c, 1);
+	return (x);
+}

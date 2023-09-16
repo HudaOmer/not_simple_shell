@@ -53,8 +53,8 @@ char *_startwith(const char *string, const char *substring)
 	{
 		if (*substring++ != *string++)
 			return (NULL);
-		return (string);
 	}
+	return ((char *)string);
 }
 
 /**
@@ -65,7 +65,6 @@ char *_startwith(const char *string, const char *substring)
  *
  * Return: pointer to the source
  */
-
 char *_strcat(char *dest, char *src)
 {
 	int i = 0, count = 0;
