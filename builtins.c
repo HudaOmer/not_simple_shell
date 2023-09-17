@@ -9,8 +9,8 @@
 void is_builtin(char **argv, char *fn)
 {
 	builtin_t builtin[] = {
-		/*{ "env", env },
-		{ "exit", _exit_shell },*/
+		{ "env", env },
+		{ "exit", _exit_shell },
 		{ "setenv", _setenv},
 		{ NULL, NULL }
 	};
@@ -21,8 +21,10 @@ void is_builtin(char **argv, char *fn)
 	for (i = 0; builtin[i].name; i++)
 	{
 		if (_strcmp(builtin[i].name, argv[0]) == 0)
+		{
 			found = true;
-		break;
+			break;
+		}
 	}
 	if (found)
 		builtin[i].f();

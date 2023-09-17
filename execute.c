@@ -16,7 +16,7 @@ void execute(char **argv, char *file_name)
 	{
 		command = argv[0];
 		actual_command = _which(command);
-		if (actual_command == NULL)
+		if (actual_command == NULL && isatty(STDIN_FILENO))
 		{
 			printf("%s: %s: not found\n", file_name, argv[0]);
 		}
@@ -32,7 +32,7 @@ void execute(char **argv, char *file_name)
 				if (child_pid == 0)
 				{
 
-					if (execve(actual_command, argv, environ) == -1)
+					if (execve(actual_command, argv, environ) == -1 && isatty(STDIN_FILENO))
 					{
 						printf("%s: %s: not found\n", file_name, argv[0]);
 					};

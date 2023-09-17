@@ -30,7 +30,8 @@ int main(int __attribute__((unused)) ac, char **argv)
 		line_copy = malloc(sizeof(char) * chars_read);
 		if (line_copy == NULL)
 		{
-			perror("tsh: memory allocation error");
+			if (isatty(STDIN_FILENO))
+				perror("tsh: memory allocation error");
 			return (-1);
 		}
 		_strcpy(line_copy, line), token = strtok(line, del);
