@@ -10,6 +10,10 @@
 #include <sys/stat.h>
 #include <stdbool.h>
 
+/* for read/write buffers */
+#define READ_BUF_SIZE 1024
+#define WRITE_BUF_SIZE 1024
+#define BUF_FLUSH -1
 
 /* string.c functions */
 int _strlen(char *s);
@@ -46,6 +50,10 @@ int _getline(info_t *, char **, size_t *);
 void sigintHandler(int);
 */
 
+#define DATA_INIT \
+{NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, 0, 0, NULL, \
+	0, 0, 0}
+
 /**
  *struct passinfo - contains pseudo-arguements to pass into a function,
  *					allowing uniform prototype for function pointer struct
@@ -56,7 +64,7 @@ void sigintHandler(int);
  * @line_count: the error count
  * @err_num: the error code for exit()s
  * @linecount_flag: if on count this line of input
- * @fname: the program filename
+ * @file_name: the program filename
  * @env: linked list local copy of environ
  * @environ: custom modified copy of environ from LL env
  * @history: the history node
@@ -77,7 +85,7 @@ typedef struct passdata
 	unsigned int line_count;
 	int err_num;
 	int linecount_flag;
-	char *fname;
+	char *file_name;
 /*	list_t *env;
 	list_t *history;
 	list_t *alias;*/
@@ -112,19 +120,26 @@ int _atoi(char *s);
 
 /* functions_2.c functions */
 
-void is_builtin(char **argv, char *fn);
+/* data.c functions */
+void clear_data(data_t *data);
+void set_data(data_t *data, char **av);
+void free_data(data_t *data, int all);
+
+
+
+void is_builtin(data_t *data);
 
 extern char **environ;
 
 char **split(char *string);
 
-void execute(char **argv, char *file_name);
-int _exit_shell(void);
+void execute(data_t *data);
+int _exit_shell(data_t *data);
 char *_which(char *command);
 
 /* env.c functions */
-int env(void);
+int env(data_t *data);
 int set_env(char *name, char *value, int overwite);
-int _setenv(char **argv);
+int _setenv(data_t *data);
 
 #endif

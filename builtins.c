@@ -4,9 +4,10 @@
  * is_builtin - checkes if the command is a built in and executes the function
  * @argv: Argument Vector
  * @fn: file name
+ * @data: all data needed
  * Return: nothing
  */
-void is_builtin(char **argv, char *fn)
+void is_builtin(data_t *data)
 {
 	builtin_t builtin[] = {
 		{ "env", env },
@@ -20,14 +21,14 @@ void is_builtin(char **argv, char *fn)
 	found = false;
 	for (i = 0; builtin[i].name; i++)
 	{
-		if (_strcmp(builtin[i].name, argv[0]) == 0)
+		if (_strcmp(builtin[i].name, data->argv[0]) == 0)
 		{
 			found = true;
 			break;
 		}
 	}
 	if (found)
-		builtin[i].f();
+		builtin[i].f(data);
 	else
-		execute(argv, fn);
+		execute(data);
 }

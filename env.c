@@ -5,7 +5,7 @@
  *
  * Return: Always 0.
  */
-int env(void)
+int env(data_t __attribute__((unused))*data)
 {
 	unsigned int i;
 
@@ -66,14 +66,14 @@ int set_env(char *name, char *value, int overwrite)
  *  or modify an existing
  *  Return: Always 0
  */
-int _setenv(char **argv)
+int _setenv(data_t *data)
 {
-	if (argv[1] == NULL || argv[2] == NULL)
+	if (data->argv[1] == NULL || data->argv[2] == NULL)
 	{
 		printf("Incorrect number of arguements \n");
 		return (1);
 	}
-	if (set_env(argv[0], argv[1], atoi(argv[2])))
+	if (set_env(data->argv[0], data->argv[1], atoi(data->argv[2])))
 		return (0);
 	return (1);
 }
