@@ -93,7 +93,7 @@ typedef struct passdata
 } data_t;
 
 #define DATA_INIT \
-{NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, 0, 0, NULL, \
+{NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
 	0, 0, 0}
 
 /**
@@ -166,9 +166,10 @@ void set_data(data_t *data, char **av);
 void free_data(data_t *data, int all);
 
 /* env.c functions */
-int env(data_t *data);
+int print_env(data_t *data);
 int set_env(char *name, char *value, int overwrite);
 int _setenv(data_t *data);
+char *_getenv(data_t *data, const char *name);
 
 /* file_io.c functions */
 char *get_history_file(data_t *data);

@@ -10,7 +10,7 @@
 void is_builtin(data_t *data)
 {
 	builtin_t builtin[] = {
-		{ "env", env },
+		{ "env", print_env },
 		{ "exit", _exit_shell },
 		{ "setenv", _setenv},
 		{ NULL, NULL }

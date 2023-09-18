@@ -44,10 +44,10 @@ int write_history(data_t *data)
 		return (-1);
 	for (node = data->history; node; node = node->next)
 	{
-		putsc_to_fd(node->str, fd);
+		puts_to_fd(node->str, fd);
 		putc_to_fd('\n', fd);
 	}
-	putc_to_d(BUF_FLUSH, fd);
+	putc_to_fd(BUF_FLUSH, fd);
 	close(fd);
 	return (1);
 }

@@ -1,11 +1,11 @@
 #include "main.h"
 
 /**
- * env - prints the environment
+ * print_env - prints the environment
  *
  * Return: Always 0.
  */
-int env(data_t __attribute__((unused))*data)
+int print_env(data_t __attribute__((unused))*data)
 {
 	unsigned int i;
 
@@ -76,4 +76,26 @@ int _setenv(data_t *data)
 	if (set_env(data->argv[0], data->argv[1], atoi(data->argv[2])))
 		return (0);
 	return (1);
+}
+
+/**
+ * _getenv - gets the value of an environ variable
+ * @data: the prarmeter struct
+ * @name: env variable name
+ *
+ * Return: the value
+ */
+char *_getenv(data_t *data, const char *name)
+{
+	list_t *node = data->env;
+	char *p;
+
+	while (node)
+	{
+		p = _startwith(node->str, name);
+		if (p && *p)
+			return (p);
+		node = node->next;
+	}
+	return (NULL);
 }

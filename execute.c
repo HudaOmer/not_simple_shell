@@ -12,6 +12,7 @@ void execute(data_t *data)
 	char *command = NULL, *actual_command = NULL;
 	pid_t child_pid;
 	int status;
+	int execution_status;
 
 	if (data->argv)
 	{
@@ -33,9 +34,10 @@ void execute(data_t *data)
 				if (child_pid == 0)
 				{
 
-					if (execve(actual_command, data->argv, environ) == -1 && isatty(STDIN_FILENO))
+					execution_status = execve(actual_command, data->argv, environ);
+					if (execution_status == -1 && isatty(STDIN_FILENO))
 					{
-						printf("%s: %s: not found\n", data->file_name, data->argv[0]);
+						perror("Error");
 					};
 				}
 				else

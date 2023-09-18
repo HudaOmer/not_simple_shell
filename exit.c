@@ -5,7 +5,7 @@
  * @data: all needed data
  * Return: void
  */
-int _exit_shell(data_t __attribute((unused)) *data)
+int _exit_shell(data_t __attribute((unused)) * data)
 {
 	exit(0);
 
