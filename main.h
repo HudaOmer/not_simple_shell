@@ -21,6 +21,13 @@
 #define CMD_AND		2
 #define CMD_CHAIN	3
 
+/* chain.c */
+int is_chain_del(data_t *, char *, size_t *);
+void chain_cont(data_t *, char *, size_t *, size_t, size_t);
+int replace_alias(data_t *);
+int replace_vars(data_t *);
+int replace_str(char **, char *);
+
 /* string.c functions */
 int _strlen(char *s);
 int _strcmp(char *s1, char *s2);
@@ -145,7 +152,7 @@ char *_which(char *command);
 
 /* env.c functions */
 int env(data_t *data);
-int set_env(char *name, char *value, int overwite);
+int set_env(char *name, char *value, int overwrite);
 int _setenv(data_t *data);
 
 #endif
