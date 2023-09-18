@@ -9,6 +9,9 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 #include <stdbool.h>
+#include <limits.h>
+#include <fcntl.h>
+#include <errno.h>
 
 /* for read/write buffers */
 #define READ_BUF_SIZE 1024
@@ -20,6 +23,9 @@
 #define CMD_OR		1
 #define CMD_AND		2
 #define CMD_CHAIN	3
+
+#define HIST_FILE	".simple_shell_history"
+#define HIST_MAX	4096
 
 /* chain.c functions */
 int is_chain_del(data_t *, char *, size_t *);
@@ -41,6 +47,13 @@ char **list_to_strings(list_t *);
 size_t print_list(const list_t *);
 list_t *node_starts_with(list_t *, char *, char);
 ssize_t get_node_index(list_t *, list_t *);
+
+/* file_io.c functions */
+char *get_history_file(data_t *data);
+int write_history(data_t *data);
+int read_history(data_t *data);
+int build_history_list(data_t *data, char *buf, int linecount);
+int renumber_history(data_t *data);
 
 /* string.c functions */
 int _strlen(char *s);
@@ -64,6 +77,12 @@ char *_strchr(char *, char);
 char **_strtow(char *str, char *d);
 char **_strtow2(char *str, char d);
 
+/* err_puts.c functions */
+void _eputs(char *);
+int putc_to_stderr(char);
+int putc_to_fd(char c, int fd);
+int puts_to_fd(char *str, int fd);
+
 /* memory.c functions */
 char *_memset(char *s, char b, unsigned int n);
 void _freess(char **pp);
@@ -71,8 +90,8 @@ int _freenull(void **p);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 
 /* getlin.c functions */ 
-ssize_t get_input(info_t *);
-int _getline(info_t *, char **, size_t *);
+ssize_t get_input(data_t *);
+int _getline(data_t *, char **, size_t *);
 void sigintHandler(int);
 
 
@@ -126,9 +145,9 @@ typedef struct passdata
 	int err_num;
 	int linecount_flag;
 	char *file_name;
-/*	list_t *env;
+	list_t *env;
 	list_t *history;
-	list_t *alias;*/
+	list_t *alias;
 	char **environ;
 	int env_changed;
 	int status;
