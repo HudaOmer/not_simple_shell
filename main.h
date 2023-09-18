@@ -24,6 +24,10 @@
 #define CMD_AND		2
 #define CMD_CHAIN	3
 
+/* for convert_number() */
+#define CONVERT_LOWERCASE	1
+#define CONVERT_UNSIGNED	2
+
 #define HIST_FILE	".simple_shell_history"
 #define HIST_MAX	4096
 
@@ -158,6 +162,11 @@ typedef struct passdata
 
 } data_t;
 
+/* data.c functions */
+void clear_data(data_t *);
+void set_data(data_t *, char **);
+void free_data(data_t *, int);
+
 /**
  * struct built_in - list of builtins
  * @name: The specifier
@@ -178,6 +187,10 @@ void remove_comments(char *buf);
 int _atoi(char *s);
 
 /* functions_2.c functions */
+int _erratoi(char *);
+void print_error(data_t *, char *);
+int printd(int, int);
+char *convert_number(long int, int, int);
 
 /* data.c functions */
 void clear_data(data_t *data);
