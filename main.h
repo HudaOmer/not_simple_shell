@@ -21,12 +21,19 @@
 #define CMD_AND		2
 #define CMD_CHAIN	3
 
-/* chain.c */
+/* chain.c functions */
 int is_chain_del(data_t *, char *, size_t *);
 void chain_cont(data_t *, char *, size_t *, size_t, size_t);
 int replace_alias(data_t *);
 int replace_vars(data_t *);
 int replace_str(char **, char *);
+
+/* liststr.c functions */
+list_t *add_node(list_t **, const char *, int);
+list_t *add_node_end(list_t **, const char *, int);
+size_t print_list_str(const list_t *);
+int delete_node_at_index(list_t **, unsigned int);
+void free_list(list_t **);
 
 /* string.c functions */
 int _strlen(char *s);
@@ -66,6 +73,20 @@ void sigintHandler(int);
 #define DATA_INIT \
 {NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, 0, 0, NULL, \
 	0, 0, 0}
+
+/**
+ * struct liststr - singly linked list
+ * @num: the number field
+ * @str: a string
+ * @next: points to the next node
+ */
+typedef struct liststr
+{
+	int num;
+	char *str;
+	struct liststr *next;
+} list_t;
+
 
 /**
  *struct passinfo - contains pseudo-arguements to pass into a function,
