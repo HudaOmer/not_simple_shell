@@ -28,12 +28,19 @@ int replace_alias(data_t *);
 int replace_vars(data_t *);
 int replace_str(char **, char *);
 
-/* liststr.c functions */
+/* lists.c functions */
 list_t *add_node(list_t **, const char *, int);
 list_t *add_node_end(list_t **, const char *, int);
 size_t print_list_str(const list_t *);
 int delete_node_at_index(list_t **, unsigned int);
 void free_list(list_t **);
+
+/* lists_2.c functions */
+size_t list_len(const list_t *);
+char **list_to_strings(list_t *);
+size_t print_list(const list_t *);
+list_t *node_starts_with(list_t *, char *, char);
+ssize_t get_node_index(list_t *, list_t *);
 
 /* string.c functions */
 int _strlen(char *s);
@@ -64,11 +71,10 @@ int _freenull(void **p);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 
 /* getlin.c functions */ 
-/*
-   ssize_t get_input(info_t *);
+ssize_t get_input(info_t *);
 int _getline(info_t *, char **, size_t *);
 void sigintHandler(int);
-*/
+
 
 #define DATA_INIT \
 {NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, 0, 0, NULL, \
