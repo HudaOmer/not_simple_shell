@@ -58,7 +58,7 @@ int write_history(data_t *data)
  *
  * Return: histcount on success, 0 otherwise
  */
-int readhisc_to_tory(data_t *data)
+int read_history(data_t *data)
 {
 	int i, last = 0, linecount = 0;
 	ssize_t fd, rdlen, fsize = 0;

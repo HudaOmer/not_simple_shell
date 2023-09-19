@@ -8,11 +8,11 @@
  */
 int main(int argc, char **argv)
 {
-	char *token, *line_copy = NULL;
+/*	char *token, *line_copy = NULL;
 	size_t size = 0;
 	ssize_t chars_read;
 	const char *del = " \n";
-	int i, tokens = 0;
+	int i, tokens = 0;*/
 	data_t data[] = { DATA_INIT };
 	int fd = 2;
 
@@ -32,7 +32,7 @@ int main(int argc, char **argv)
 	shell(data, argv);
 	return (EXIT_SUCCESS);
 }
-	/* set_data(data, argv); */
+/* 
 
 	data->file_name = argv[0];
 	while (1)
@@ -69,9 +69,9 @@ int main(int argc, char **argv)
 			_strcpy(data->argv[i], token);
 			token = strtok(NULL, del);
 		}
-		data->argv[i] = NULL;/* Check if the enterd command is a built-in*/
+		data->argv[i] = NULL;* Check if the enterd command is a built-in
 		is_builtin(data);
-	} /* free up allocated memory */
+	} * free up allocated memory 
 	free(line_copy), free(data->line);
 	return (0);
-}
+}*/

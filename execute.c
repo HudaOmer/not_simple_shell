@@ -9,17 +9,17 @@ void execute(data_t *data)
 {
 	char *command = NULL, *actual_command = NULL;
 	pid_t child_pid;
-	int status;
 	int execution_status;
 
 	if (data->argv)
 	{
 		command = data->argv[0];
-		actual_command = _which(command);
+		actual_command = _which(data);
 		if (actual_command == NULL && isatty(STDIN_FILENO))
 		{
 			print_error(data, "1not found\n");
-			/* printf("%s: %s: 2not found\n", data->file_name, data->argv[0]); */
+			data->status = 127;
+			printf("%s: %s: not found\n", data->file_name, data->argv[0]);
 		}
 		else
 		{
@@ -27,6 +27,7 @@ void execute(data_t *data)
 			if (child_pid == -1)
 			{
 				perror("Error");
+				return;
 			}
 			else
 			{
@@ -37,11 +38,21 @@ void execute(data_t *data)
 					if (execution_status == -1 && isatty(STDIN_FILENO))
 					{
 						perror("Error");
+						free_data(data, 1);
+						if (errno == EACCES)
+							exit(126);
+						exit(1);
 					};
 				}
 				else
 				{
-					wait(&status);
+					wait(&(data->status));
+					if (WIFEXITED(data->status))
+					{
+						data->status = WEXITSTATUS(data->status);
+						if (data->status == 126)
+							print_error(data, "Permission denied\n");
+					}
 				}
 			}
 		}

@@ -5,7 +5,7 @@
  * @data: all data needed
  * Return: nothing
  */
-void is_builtin(data_t *data)
+int is_builtin(data_t *data)
 {
 	builtin_t builtin[] = {
 		{ "env", print_env },
@@ -15,15 +15,13 @@ void is_builtin(data_t *data)
 		{ NULL, NULL }
 	};
 	int i;
-	bool found;
+	int ret_val;
 
-	found = false;
 	for (i = 0; builtin[i].name; i++)
 	{
 		if (_strcmp(builtin[i].name, data->argv[0]) == 0)
 		{
-			data->line_count++;
-			found = true;
+			ret_val = builtin[i].f(data);
 			break;
 		}
 	}
@@ -32,4 +30,5 @@ void is_builtin(data_t *data)
 		builtin[i].f(data);
 	else
 		execute(data);
+	return(ret_val);
 }

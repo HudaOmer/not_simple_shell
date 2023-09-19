@@ -12,21 +12,19 @@ int shell(data_t *data, char **argv)
 	int builtin_ret = 0;
 	char **av = argv;
 
-	while (r != -1 && builtin_ret != -2)
+	while (builtin_ret != -2)
 	{
 		clear_data(data);
 		if (interactive(data))
 			_puts("$ ");
-		_eputchar(BUF_FLUSH);
-		r = get_input(data);
-		if (r != -1)
-		{
-			set_info(data, av);
-			builtin_ret = find_builtin(data);
-			if (builtin_ret == -1)
-				find_cmd(data);
-		}
-		else if (interactive(data))
+		putc_to_stderr(BUF_FLUSH);
+
+		set_data(data, argv);
+		builtin_ret = is_builtin(data);
+		if (builtin_ret == -1)
+			execute(data);
+	
+		if (interactive(data))
 			_putchar('\n');
 		free_data(data, 0);
 	}

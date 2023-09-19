@@ -203,11 +203,12 @@ int replace_str(char **, char *);
 
 
 
-void is_builtin(data_t *data);
+int is_builtin(data_t *data);
 char **split(char *string);
 void execute(data_t *data);
 int _exit_shell(data_t *data);
-char *_which(char *command);
-
+char *_which(data_t *data);
+int shell(data_t *data, char **argv);
+void cant_open(int __attribute__((unused)) ac, char **argv);
 
 #endif
