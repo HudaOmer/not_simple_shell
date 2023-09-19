@@ -113,6 +113,7 @@ void _eputs(char *);
 int putc_to_stderr(char);
 int putc_to_fd(char c, int fd);
 int puts_to_fd(char *str, int fd);
+void cant_open(int __attribute__((unused)) ac, char **argv);
 
 /* string.c functions */
 int _strlen(char *s);
@@ -167,9 +168,12 @@ void free_data(data_t *data, int all);
 
 /* env.c functions */
 int print_env(data_t *data);
-int set_env(char *name, char *value, int overwrite);
+int set_env(data_t *data, char *name, char *value, int overwrite);
 int _setenv(data_t *data);
 char *_getenv(data_t *data, const char *name);
+int unset_env(data_t *data, char *name);
+int _unsetenv(data_t *data);
+int pop_env(data *data);
 
 /* file_io.c functions */
 char *get_history_file(data_t *data);
