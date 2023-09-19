@@ -24,5 +24,5 @@ int _exit_shell(data_t *data)
 		return (-2);
 	}
 	data->err_num = -1;
-	return (-2);
+	exit(0);
 }

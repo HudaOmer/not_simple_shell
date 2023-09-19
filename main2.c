@@ -1,6 +1,56 @@
 #include "main.h"
 
 /**
+ * free_data_t - frees data structure
+ *
+ * @data: data needed
+ * Return: void
+ */
+void free_data_t(data_t *data)
+{
+	unsigned int i;
+
+	for (i = 0; data->environ[i]; i++)
+	{
+		free(data->environ[i]);
+	}
+
+	free(data->environ);
+	/*free(data->pid);*/
+}
+
+/**
+ * set_data_t - Initialize data structure
+ *
+ * @data: data needed
+ * @argv: Argument Vector
+ * Return: void
+ */
+void set_data_t(data_t *data, char **argv)
+{
+	unsigned int i;
+
+	data->argv = argv;
+	data->line = NULL;
+	/*datash->args = NULL;
+	datash->status = 0;*/
+	data->line_count = 1;
+
+	for (i = 0; environ[i]; i++)
+		;
+
+	data->environ = malloc(sizeof(char *) * (i + 1));
+
+	for (i = 0; environ[i]; i++)
+	{
+		data->environ[i] = _strdup(environ[i]);
+	}
+
+	data->environ[i] = NULL;
+	/*data->pid = aux_itoa(getpid()); */
+}
+
+/**
  * main - reads a line, splits it and executes the command
  * @argc: Argument Count
  * @argv: Argument Vector
@@ -8,15 +58,11 @@
  */
 int main(int argc, char **argv)
 {
-/*	char *token, *line_copy = NULL;
-	size_t size = 0;
-	ssize_t chars_read;
-	const char *del = " \n";
-	int i, tokens = 0;*/
-	data_t data[] = { DATA_INIT };
 	int fd = 2;
+	data_t data[] = { DATA_INIT };
 
-	/* read command from file situation*/
+	data->file_name = argv[0];
+	set_data_t(data, argv);
 	if (argc == 2)
 	{
 		fd = open(argv[1], O_RDONLY);
@@ -27,51 +73,8 @@ int main(int argc, char **argv)
 		}
 		data->readfd = fd;
 	}
-	pop_env(data);
-	read_history(data);
-	shell(data, argv);
+	my_shell(data, argv);
+	free_list(&(data->env));
+	free_data_t(data);
 	return (EXIT_SUCCESS);
 }
-/* 
-
-	data->file_name = argv[0];
-	while (1)
-	{
-		if (isatty(STDIN_FILENO))
-			write(STDOUT_FILENO, "$ ", 2);
-		chars_read = getline(&(data->line), &size, stdin);
-		if (chars_read == -1)
-		{
-			if (isatty(STDIN_FILENO))
-			{
-				write(STDOUT_FILENO, "\n", 1), free(data->line);
-			}
-			exit(0);
-		}
-		line_copy = malloc(sizeof(char) * chars_read);
-		if (line_copy == NULL)
-		{
-			if (isatty(STDIN_FILENO))
-				perror("tsh: memory allocation error");
-			return (-1);
-		}
-		_strcpy(line_copy, data->line), token = strtok(data->line, del);
-		while (token != NULL)
-		{
-			tokens++, token = strtok(NULL, del);
-		}
-		tokens++;
-		data->argv = malloc(sizeof(char *) * tokens);
-		token = strtok(line_copy, del);
-		for (i = 0; token != NULL; i++)
-		{
-			data->argv[i] = malloc(sizeof(char) * strlen(token));
-			_strcpy(data->argv[i], token);
-			token = strtok(NULL, del);
-		}
-		data->argv[i] = NULL;* Check if the enterd command is a built-in
-		is_builtin(data);
-	} * free up allocated memory 
-	free(line_copy), free(data->line);
-	return (0);
-}*/

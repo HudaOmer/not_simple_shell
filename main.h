@@ -108,6 +108,9 @@ typedef struct built_in
 
 } builtin_t;
 
+void my_shell(data_t *data, char **argv);
+int tokenization(data_t *data, char **argv);
+
 /* err_puts.c functions */
 void _eputs(char *);
 int putc_to_stderr(char);
@@ -169,6 +172,8 @@ int print_env(data_t *data);
 int set_env(data_t *data, char *name, char *value, int overwrite);
 int _setenv(data_t *data);
 char *_getenv(data_t *data, const char *name);
+
+/* env2.c functions */
 int unset_env(data_t *data, char *name);
 int _unsetenv(data_t *data);
 int pop_env(data_t *data);
@@ -183,7 +188,7 @@ int renumber_history(data_t *data);
 /* lists.c functions */
 list_t *add_node(list_t **, const char *, int);
 list_t *add_node_end(list_t **, const char *, int);
-size_t print_list_str(const list_t *);
+size_t print_list_str(const list_t *); /*removed const*/
 int delete_node_at_index(list_t **, unsigned int);
 void free_list(list_t **);
 
@@ -207,7 +212,7 @@ int is_builtin(data_t *data);
 char **split(char *string);
 void execute(data_t *data);
 int _exit_shell(data_t *data);
-char *_which(data_t *data);
+char *_which(char *data);
 int shell(data_t *data, char **argv);
 void cant_open(int __attribute__((unused)) ac, char **argv);
 

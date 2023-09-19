@@ -5,31 +5,17 @@
  * @command: command
  * Return: command location
  */
-char *_which(data_t *data)
+char *_which(char *command)
 {
-	char *path = NULL, *path_copy, *path_token, *file_path, *command;
+	char *path, *path_copy, *path_token, *file_path;
 	int command_length, directory_length;
 	struct stat buffer;
-	int i, k;
 
-	data->path = data->argv[0];
-	if (data->linecount_flag == 1)
-	{
-		data->line_count++;
-		data->linecount_flag = 0;
-	}
-	for (i = 0, k = 0; data->line[i]; i++)
-		if (!is_delim(data->line[i], " \t\n"))
-			k++;
-	if (!k)
-		return (NULL);
-
-	path = _getenv(data, "PATH");
-	command = data->argv[0];
+	path = getenv("PATH");
 	if (path)
 	{
 		path_copy = strdup(path);
-		command_length = _strlen(command);
+		command_length = strlen(command);
 		path_token = strtok(path_copy, ":");
 		while (path_token != NULL)
 		{
@@ -40,7 +26,7 @@ char *_which(data_t *data)
 			strcat(file_path, "/");
 			strcat(file_path, command);
 			strcat(file_path, "\0");
-			if ((interactive(data) || _getenv(data, "PATH=")|| data->argv[0][0] == '/') &&(stat(file_path, &buffer)) == 0)
+			if (stat(file_path, &buffer) == 0)
 			{
 				free(path_copy);
 				return (file_path);

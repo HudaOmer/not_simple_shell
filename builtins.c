@@ -15,20 +15,22 @@ int is_builtin(data_t *data)
 		{ NULL, NULL }
 	};
 	int i;
-	int ret_val;
+	bool found = false;
 
 	for (i = 0; builtin[i].name; i++)
 	{
 		if (_strcmp(builtin[i].name, data->argv[0]) == 0)
 		{
-			ret_val = builtin[i].f(data);
+			found = true;
 			break;
 		}
 	}
+	
 	data->line_count++;
 	if (found)
 		builtin[i].f(data);
 	else
 		execute(data);
-	return(ret_val);
+
+	return (0);
 }
