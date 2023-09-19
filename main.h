@@ -30,7 +30,7 @@
 
 #define HIST_FILE	".simple_shell_history"
 #define HIST_MAX	4096
-
+#define BUFSIZE 1024
 extern char **environ;
 
 /**
@@ -153,13 +153,11 @@ int _atoi(char *s);
 /* functions_2.c functions */
 int _erratoi(char *s);
 void print_error(data_t *data, char *estr);
-int print_d(int input, int fd);
+int printd(int input, int fd);
 char *convert_number(long int num, int base, int flags);
 
-/* getlin.c functions */ 
-ssize_t get_input(data_t *);
-int _getline(data_t *, char **, size_t *);
-void sigintHandler(int);
+/* getline2.c functions */
+ssize_t get_line(char **lineptr, size_t *n, FILE *stream);
 
 /* data.c functions */
 void clear_data(data_t *data);
@@ -173,7 +171,7 @@ int _setenv(data_t *data);
 char *_getenv(data_t *data, const char *name);
 int unset_env(data_t *data, char *name);
 int _unsetenv(data_t *data);
-int pop_env(data *data);
+int pop_env(data_t *data);
 
 /* file_io.c functions */
 char *get_history_file(data_t *data);

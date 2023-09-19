@@ -1,6 +1,6 @@
 #include "main.h"
 
-/*
+/**
  * cant_open - handles error on open function
  *
  * Return: Nothing

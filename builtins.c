@@ -27,6 +27,7 @@ void is_builtin(data_t *data)
 			break;
 		}
 	}
+	data->line_count++;
 	if (found)
 		builtin[i].f(data);
 	else

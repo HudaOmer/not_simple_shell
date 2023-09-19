@@ -159,7 +159,7 @@ int _unsetenv(data_t *data)
  * @data: the parameters struct
  * Return: Always 0
  */
-int pop_env(data *data)
+int pop_env(data_t *data)
 {
 	list_t *node = NULL;
 	size_t i;

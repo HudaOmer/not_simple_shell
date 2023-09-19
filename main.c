@@ -22,7 +22,8 @@ int main(int __attribute__((unused)) ac, char **argv)
 	{
 		if (isatty(STDIN_FILENO))
 			write(STDOUT_FILENO, "$ ", 2);
-		chars_read = getline(&(data->line), &size, stdin);
+		chars_read = get_line(&(data->line), &size, stdin);
+		/* chars_read = get_data(data);	*/
 		if (chars_read == -1)
 		{
 			if (isatty(STDIN_FILENO))
