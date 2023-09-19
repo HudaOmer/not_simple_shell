@@ -2,8 +2,6 @@
 
 /**
  * execute - function to fork, execute and wait
- * @argv: Argument Vector
- * @file_name: name of the file
  * @data: all needed data
  * Return: Nothing on success, -1 on faliure.
  */
@@ -33,7 +31,8 @@ void execute(data_t *data)
 				if (child_pid == 0)
 				{
 
-					if (execve(actual_command, data->argv, environ) == -1 && isatty(STDIN_FILENO))
+					if (execve(actual_command, data->argv, environ) == -1
+							&& isatty(STDIN_FILENO))
 					{
 						printf("%s: %s: not found\n", data->file_name, data->argv[0]);
 					};

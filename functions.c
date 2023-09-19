@@ -2,7 +2,7 @@
 
 /**
  * interactive - returns true if shell is interactive mode
- * @info: struct address
+ * @data: struct address
  * Return: 1 if interactive mode, 0 otherwise
  */
 int interactive(data_t *data)
@@ -30,7 +30,6 @@ int is_delim(char c, char *delim)
  *  _isalpha - lower and upper
  * @c: An input character
  * Description: upper and lower
- *
  * Return: 1 if lower , 0 if upper
  */
 
@@ -45,7 +44,6 @@ int _isalpha(int c)
 /**
  * remove_comments - function replaces first instance of '#' with '\0'
  * @buf: address of the string to modify
- *
  * Return: Always 0;
  */
 void remove_comments(char *buf)
@@ -66,7 +64,6 @@ void remove_comments(char *buf)
  * _atoi - function
  * @s: pointer to array
  * Description: oooh
- *
  * Return: an int
  */
 

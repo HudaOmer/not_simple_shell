@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * clear_info - initializes data_t struct
+ * clear_data - initializes data_t struct
  * @data: struct address
  */
 void clear_data(data_t *data)

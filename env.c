@@ -2,7 +2,7 @@
 
 /**
  * env - prints the environment
- *
+ * @data: all data needed
  * Return: Always 0.
  */
 int env(data_t __attribute__((unused))*data)
@@ -20,7 +20,7 @@ int env(data_t __attribute__((unused))*data)
 }
 
 /**
- * _setenv - sets a new environment variable or updates environ
+ * set_env - sets a new environment variable or updates environ
  * @name: name of variable
  * @value: value of variable
  * @overwrite: 0 or 1
@@ -64,7 +64,8 @@ int set_env(char *name, char *value, int overwrite)
 /**
  * _setenv - Initialize a new environment variable,
  *  or modify an existing
- *  Return: Always 0
+ * @data: all data needed
+ * Return: Always 0
  */
 int _setenv(data_t *data)
 {

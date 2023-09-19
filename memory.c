@@ -31,7 +31,8 @@ void _freess(char **pp)
 	free(a);
 }
 
-/** _freenull - free pointer and null address
+/**
+ * _freenull - free pointer and null address
  * @p: pointer
  * Return: 1 if freed, 0 otherwise
  */

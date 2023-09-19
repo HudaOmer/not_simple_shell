@@ -2,8 +2,6 @@
 
 /**
  * is_builtin - checkes if the command is a built in and executes the function
- * @argv: Argument Vector
- * @fn: file name
  * @data: all data needed
  * Return: nothing
  */

@@ -119,7 +119,10 @@ void remove_comments(char *buf);
 int _atoi(char *s);
 
 /* functions_2.c functions */
-
+int _erratoi(char *s);
+void print_error(data_t *data, char *estr);
+int print_d(int input, int fd);
+char *convert_number(long int num, int base, int flags);
 /* data.c functions */
 void clear_data(data_t *data);
 void set_data(data_t *data, char **av);
