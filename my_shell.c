@@ -55,6 +55,11 @@ void my_shell(data_t *data, char **argv)
 			}
 			exit(0);
 		}
+		else if (chars_read == 1)
+		{
+			data->line_count++;
+			continue;
+		}
 		line_copy = malloc(sizeof(char) * chars_read);
 		if (line_copy == NULL)
 		{
