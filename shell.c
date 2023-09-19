@@ -6,38 +6,36 @@
  * @argv: argument vector
  * Return: 0 on success
  */
-int shell(data_t *data)
+int shell(data_t *data, char **argv)
 {
 	ssize_t r = 0;
 	int builtin_ret = 0;
 
-	while (r != -1 && builtin_ret != -2)
+	while (builtin_ret != -2)
 	{
-		clear_info(info);
-		if (interactive(info))
+		clear_data(data);
+		if (interactive(data))
 			_puts("$ ");
-		_eputchar(BUF_FLUSH);
-		r = get_input(info);
-		if (r != -1)
-		{
-			set_info(info, av);
-			builtin_ret = find_builtin(info);
-			if (builtin_ret == -1)
-				find_cmd(info);
-		}
-		else if (interactive(info))
+		putc_to_stderr(BUF_FLUSH);
+
+		set_data(data, argv);
+		builtin_ret = is_builtin(data);
+		if (builtin_ret == -1)
+			execute(data);
+	
+		if (interactive(data))
 			_putchar('\n');
-		free_info(info, 0);
+		free_data(data, 0);
 	}
-	write_history(info);
-	free_info(info, 1);
-	if (!interactive(info) && info->status)
-		exit(info->status);
+	write_history(data);
+	free_data(data, 1);
+	if (!interactive(data) && data->status)
+		exit(data->status);
 	if (builtin_ret == -2)
 	{
-		if (info->err_num == -1)
-			exit(info->status);
-		exit(info->err_num);
+		if (data->err_num == -1)
+			exit(data->status);
+		exit(data->err_num);
 	}
 	return (builtin_ret);
 }

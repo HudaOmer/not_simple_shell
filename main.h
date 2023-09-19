@@ -173,7 +173,7 @@ int _setenv(data_t *data);
 char *_getenv(data_t *data, const char *name);
 int unset_env(data_t *data, char *name);
 int _unsetenv(data_t *data);
-int pop_env(data *data);
+int pop_env(data_t *data);
 
 /* file_io.c functions */
 char *get_history_file(data_t *data);
@@ -205,11 +205,12 @@ int replace_str(char **, char *);
 
 
 
-void is_builtin(data_t *data);
+int is_builtin(data_t *data);
 char **split(char *string);
 void execute(data_t *data);
 int _exit_shell(data_t *data);
-char *_which(char *command);
-
+char *_which(data_t *data);
+int shell(data_t *data, char **argv);
+void cant_open(int __attribute__((unused)) ac, char **argv);
 
 #endif
