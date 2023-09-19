@@ -38,10 +38,10 @@ void set_data(data_t *data, char **av)
 		for (i = 0; data->argv && data->argv[i]; i++)
 			;
 		data->argc = i;
-/*
+
 		replace_alias(data);
 		replace_vars(data);
-*/
+
 	}
 }
 
@@ -59,12 +59,12 @@ void free_data(data_t *data, int all)
 	{
 		if (!data->cmd_buf)
 			free(data->line);
-		/*if (data->env)
+		if (data->env)
 			free_list(&(data->env));
 		if (data->history)
 			free_list(&(data->history));
 		if (data->alias)
-			free_list(&(data->alias));*/
+			free_list(&(data->alias));
 		_freess(data->environ);
 			data->environ = NULL;
 		_freenull((void **)data->cmd_buf);

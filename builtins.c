@@ -8,9 +8,10 @@
 void is_builtin(data_t *data)
 {
 	builtin_t builtin[] = {
-		{ "env", env },
+		{ "env", print_env },
 		{ "exit", _exit_shell },
 		{ "setenv", _setenv},
+		{ "unsetenv", _unsetenv},
 		{ NULL, NULL }
 	};
 	int i;
@@ -21,6 +22,7 @@ void is_builtin(data_t *data)
 	{
 		if (_strcmp(builtin[i].name, data->argv[0]) == 0)
 		{
+			data->line_count++;
 			found = true;
 			break;
 		}
