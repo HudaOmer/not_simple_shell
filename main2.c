@@ -12,10 +12,14 @@ void free_data_t(data_t *data)
 
 	for (i = 0; data->environ[i]; i++)
 	{
-		free(data->environ[i]);
+		if (data->environ && data->environ[i])
+			free(data->environ[i]);
 	}
 
-	free(data->environ);
+	if (data->environ)
+		free(data->environ);
+	if (data->line)
+		free(data->line);
 	/*free(data->pid);*/
 }
 

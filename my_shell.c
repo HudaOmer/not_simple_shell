@@ -77,7 +77,6 @@ void my_shell(data_t *data, char **argv)
 		}
 		else if (all_space(data->line) == 1)
 		{
-			free(data->line);
 			data->line_count++;
 			continue;
 		}
