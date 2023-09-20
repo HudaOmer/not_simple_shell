@@ -64,6 +64,8 @@ void my_shell(data_t *data, char **argv)
 	data->file_name = argv[0];
 	while (1)
 	{
+		if (isatty(STDIN_FILENO))
+			write(STDOUT_FILENO, "$ ", 2);
 		chars_read = get_line(&(data->line), &size, stdin);
 		if (chars_read == -1)
 		{
