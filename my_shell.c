@@ -32,6 +32,23 @@ int tokenization(data_t *data, char **argv)
 }
 
 /**
+ * all_space - checks if the command has only spaces
+ * @line: to check
+ * Return: 1 if all space 0 oterwise
+ */
+int all_space(char *line)
+{
+	unsigned int i, length = _strlen(line) - 1;
+
+	for (i = 0; i < length; i++)
+	{
+		if (line[i] != ' ')
+			return (0);
+	}
+	return (1);
+}
+
+/**
  * my_shell - loop to get input
  * @data: all data needed
  * @argv: Argument Vector
@@ -57,7 +74,7 @@ void my_shell(data_t *data, char **argv)
 			}
 			exit(0);
 		}
-		else if (chars_read == 1)
+		else if (all_space(data->line) == 1)
 		{
 			data->line_count++;
 			continue;
