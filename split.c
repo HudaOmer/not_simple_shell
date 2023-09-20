@@ -48,7 +48,7 @@ char **split(char *string)
 		exit(EXIT_FAILURE);
 	}
 
-	pointer = strtok(string, del);
+	pointer = _strtok(string, del);
 	array[i++] = pointer;
 
 	while (pointer)
@@ -63,7 +63,7 @@ char **split(char *string)
 				exit(EXIT_FAILURE);
 			}
 		}
-		pointer = strtok(NULL, del);
+		pointer = _strtok(NULL, del);
 		array[i] = pointer;
 		i++;
 	}
