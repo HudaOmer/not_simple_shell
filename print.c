@@ -41,12 +41,12 @@ void print_number(int n)
  */
 void print_error(data_t *data, char *err_str)
 {
-	write(STDOUT_FILENO, data->file_name, _strlen(data->file_name));
-	write(STDOUT_FILENO, ": ", 2);
-	print_number(data->line_count);
-	write(STDOUT_FILENO, ": ", 2);
-	write(STDOUT_FILENO, data->argv[0], _strlen(data->argv[0]));
-	write(STDOUT_FILENO, ": ", 2);
-	write(STDOUT_FILENO, err_str, _strlen(err_str));
+	write(STDERR_FILENO, data->file_name, _strlen(data->file_name));
+	write(STDERR_FILENO, ": ", 2);
+	write(STDERR_FILENO, data->line_count, 1);
+	write(STDERR_FILENO, ": ", 2);
+	write(STDERR_FILENO, data->argv[0], _strlen(data->argv[0]));
+	write(STDERR_FILENO, ": ", 2);
+	write(STDERR_FILENO, err_str, _strlen(err_str));
 }
 
