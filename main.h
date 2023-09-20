@@ -206,7 +206,6 @@ int replace_vars(data_t *);
 int replace_str(char **, char *);
 
 
-
 int is_builtin(data_t *data);
 char **split(char *string);
 void execute(data_t *data);

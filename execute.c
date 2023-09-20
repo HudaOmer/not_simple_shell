@@ -18,9 +18,7 @@ void execute(data_t *data)
 		actual_command = _which(command);
 		if (actual_command == NULL && isatty(STDIN_FILENO))
 		{
-			print_error(data, "1not found\n");
-			printf("%s: %d: %s: 2not found\n", data->file_name,
-					data->line_count, data->argv[0]);
+			print_error(data, "not found\n");
 		}
 		else
 		{

@@ -34,7 +34,7 @@ void set_data_t(data_t *data, char **argv)
 	data->line = NULL;
 	/*datash->args = NULL;*/
 	/*datash->status = 0;*/
-	data->line_count = 1;
+	data->line_count = 0;
 
 	for (i = 0; environ[i]; i++)
 		;

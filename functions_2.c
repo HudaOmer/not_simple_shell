@@ -28,23 +28,6 @@ int _erratoi(char *s)
 }
 
 /**
- * print_error - a function prints an error message
- * @data: all data needed
- * @err_str: string containing error message
- * Return: 0 if no numbers exist, converted number or -1 (error)
- */
-void print_error(data_t *data, char *err_str)
-{
-	_eputs(data->file_name);
-	_eputs(": ");
-	printd(data->line_count, STDERR_FILENO);
-	_eputs(": ");
-	_eputs(data->argv[0]);
-	_eputs(": ");
-	_eputs(err_str);
-}
-
-/**
  * printd - function prints a decima number
  * @input: number to ptint
  * @fd: the filedescriptor

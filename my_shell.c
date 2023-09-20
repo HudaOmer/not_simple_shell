@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * tokenization - make the tokens
+ * tokenization - make the tokens (not used)
  * @data: all data needed
  * @argv: Argument Vector
  * Return: 0 on success -1 otherwise
@@ -16,18 +16,21 @@ int tokenization(data_t *data, char **argv)
 	token = strtok(data->line, del);
 	while (token != NULL)
 	{
-		tokens++, token = strtok(NULL, del);
+		tokens++;
+		token = strtok(NULL, del);
 	}
 	tokens++;
 	data->argv = malloc(sizeof(char *) * tokens);
 	token = strtok(data->line, del);
 	for (i = 0; token != NULL; i++)
 	{
-		data->argv[i] = malloc(sizeof(char) * strlen(token));
-		_strcpy(data->argv[i], token);
+		data->argv[i] = malloc(sizeof(char) * _strlen(token));
+		strcpy(data->argv[i], token);
 		token = strtok(NULL, del);
 	}
 	data->argv[i] = NULL;
+	printarray(data->argv);
+	printf("t");
 	return (0);
 }
 
@@ -87,7 +90,7 @@ void my_shell(data_t *data, char **argv)
 			exit(-1);
 		}
 		_strcpy(line_copy, data->line);
-		tokenization(data, argv);
+		data->argv = split(line_copy);
 		is_builtin(data);
 	}
 	free(line_copy);
