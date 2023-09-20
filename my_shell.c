@@ -3,6 +3,7 @@
 /**
  * tokenization - make the tokens
  * @data: all data needed
+ * @argv: Argument Vector
  * Return: 0 on success -1 otherwise
  */
 int tokenization(data_t *data, char **argv)
@@ -33,6 +34,7 @@ int tokenization(data_t *data, char **argv)
 /**
  * my_shell - loop to get input
  * @data: all data needed
+ * @argv: Argument Vector
  * Return: nothing
  */
 void my_shell(data_t *data, char **argv)
@@ -65,7 +67,7 @@ void my_shell(data_t *data, char **argv)
 		{
 			if (isatty(STDIN_FILENO))
 				perror("tsh: memory allocation error");
-			exit (-1);
+			exit(-1);
 		}
 		_strcpy(line_copy, data->line);
 		tokenization(data, argv);

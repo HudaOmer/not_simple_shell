@@ -49,7 +49,7 @@ ssize_t get_line(char **lineptr, size_t *n, FILE *stream)
 	if (buffer == 0)
 		return (-1);
 
-	for (;t != '\n'; input++)
+	for (; t != '\n'; input++)
 	{
 		i = read(STDIN_FILENO, &t, 1);
 		if (i == -1 || (i == 0 && input == 0))
@@ -69,7 +69,7 @@ ssize_t get_line(char **lineptr, size_t *n, FILE *stream)
 
 	buffer[input] = '\0';
 	bring_line(lineptr, n, buffer, input);
-	return_value = input;
+	(return_value) = input;
 	if (i != 0)
 		input = 0;
 	return (return_value);

@@ -1,6 +1,6 @@
 #include "main.h"
 
-/*
+/**
  * unset_env - removes an environment variable
  * @data: the parameter struct
  * @name: name of variable to be removed
@@ -32,11 +32,10 @@ int unset_env(data_t *data, char *name)
 	return (data->env_changed);
 }
 
-/*
+/**
  * _unsetenv - removes an environment variable using unset_env
  * @data: the parameter struct
- *
- * Retrun: 0
+ * Return: 0 sucess 1 otherwise
  */
 int _unsetenv(data_t *data)
 {

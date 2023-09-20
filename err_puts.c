@@ -85,9 +85,10 @@ int puts_to_fd(char *str, int fd)
 }
 
 
-/*
+/**
  * cant_open - handles error on open function
- *
+ * @ac: Argumwnt Count
+ * @argv: Argument Vector
  * Return: Nothing
  */
 void cant_open(int __attribute__((unused)) ac, char **argv)

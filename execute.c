@@ -19,7 +19,8 @@ void execute(data_t *data)
 		if (actual_command == NULL && isatty(STDIN_FILENO))
 		{
 			print_error(data, "1not found\n");
-			printf("%s: %d: %s: 2not found\n", data->file_name, data->line_count, data->argv[0]);
+			printf("%s: %d: %s: 2not found\n", data->file_name,
+					data->line_count, data->argv[0]);
 		}
 		else
 		{
@@ -32,7 +33,6 @@ void execute(data_t *data)
 			{
 				if (child_pid == 0)
 				{
-
 					execution_status = execve(actual_command, data->argv, environ);
 					if (execution_status == -1 && isatty(STDIN_FILENO))
 					{

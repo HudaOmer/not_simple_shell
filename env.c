@@ -26,12 +26,13 @@ int print_env(data_t *data)
 
 /**
  * set_env - sets a new environment variable or updates environ
+ * @data: all data needed
  * @name: name of variable
  * @value: value of variable
  * @overwrite: 0 or 1
  * Return:  zero
  */
-int set_env(data_t *data, char*name, char *value, int overwrite)
+int set_env(data_t *data, char *name, char *value, int overwrite)
 {
 	char *var_p;
 	char *new = NULL;
@@ -47,12 +48,12 @@ int set_env(data_t *data, char*name, char *value, int overwrite)
 		{
 			free(node->str);
 			new = malloc(_strlen(name + _strlen(value) + 2));
-			if(!new)
-				return(1);
+			if (!new)
+				return (1);
 			_strcpy(new, name);
 			_strcat(new, "=");
 			_strcat(new, value);
-			if(overwrite)
+			if (overwrite)
 			{
 				node->str = new;
 				data->env_changed = 1;
@@ -62,8 +63,8 @@ int set_env(data_t *data, char*name, char *value, int overwrite)
 		node = node->next;
 	}
 	new = malloc(_strlen(name + _strlen(value) + 2));
-	if(!new)
-		return(1);
+	if (!new)
+		return (1);
 	_strcpy(new, name);
 	_strcat(new, "=");
 	_strcat(new, value);
