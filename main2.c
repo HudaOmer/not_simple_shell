@@ -80,9 +80,9 @@ int main(int argc, char **argv)
 	}
 	signal(SIGINT, get_sigint);
 	my_shell(data, argv);
-	
+
 	ret_val = data->status;
-	
+
 	free_list(&(data->env));
 	free_data_t(data);
 	return (ret_val);

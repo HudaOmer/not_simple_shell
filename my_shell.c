@@ -73,7 +73,7 @@ void my_shell(data_t *data, char **argv)
 			{
 				write(STDOUT_FILENO, "\n", 1), free(data->line);
 			}
-			exit(0);
+			exit(data->status);
 		}
 		else if (all_space(data->line) == 1)
 		{

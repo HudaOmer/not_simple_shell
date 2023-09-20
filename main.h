@@ -208,6 +208,7 @@ int replace_str(char **, char *);
 
 char *_getenv_var(const char *name);
 void get_sigint(int sig);
+void print_number(int n);
 
 int is_builtin(data_t *data);
 char **split(char *string);

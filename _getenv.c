@@ -1,5 +1,4 @@
-#include <stdlib.h>
-#include <stdio.h>
+#include "main.h"
 
 /**
  * start_with - check if the string starts with the sub
@@ -9,12 +8,12 @@
  */
 char *start_with(const char *string, const char *substring)
 {
-        while (*substring)
-        {
-                if (*substring++ != *string++)
-                        return (NULL);
-        }
-        return ((char *)string);
+	while (*substring)
+	{
+		if (*substring++ != *string++)
+			return (NULL);
+	}
+	return ((char *)string);
 }
 
 /**
@@ -24,7 +23,6 @@ char *start_with(const char *string, const char *substring)
  */
 char *_getenv_var(const char *name)
 {
-	extern char **environ;
 	int i = 0;
 	char *variable = NULL;
 
