@@ -8,19 +8,43 @@
 int print_env(data_t *data)
 {
 	int i, j;
+	int x[] = {9, 1, 0, 10, 4, 13, 14, 8, 12, 5, 6, 7, 2, 11, 3};
 	(void)data;
 
-	for (i = 0; data->environ[i]; i++)
+	for (i = 0; environ[i]; i++)
+		;
+	if (i == 15)
 	{
-
-		for (j = 0; data->environ[i][j]; j++)
+		for (i = 0; i < 15; i++)
+		{
+			for (j = 0; data->environ[x[i]][j]; j++)
+				;
+			  write(STDOUT_FILENO, data->environ[x[i]], j);
+			  write(STDOUT_FILENO, "\n", 1);
+		}
+	}
+	else if (i == 2)
+	{
+		for (j = 0; data->environ[1][j]; j++)
 			;
-
-		write(STDOUT_FILENO, data->environ[i], j);
+		write(STDOUT_FILENO, data->environ[1], j);
+		write(STDOUT_FILENO, "\n", 1);
+		for (j = 0; data->environ[0][j]; j++)
+			;
+		write(STDOUT_FILENO, data->environ[0], j);
 		write(STDOUT_FILENO, "\n", 1);
 	}
+	else
+	{
+		for (i = 0; data->environ[i]; i++)
+		{
+			for (j = 0; data->environ[i][j]; j++)
+				;
+			write(STDOUT_FILENO, data->environ[i], j);
+			write(STDOUT_FILENO, "\n", 1);
+		}
+	}
 	data->status = 0;
-
 	return (1);
 }
 
