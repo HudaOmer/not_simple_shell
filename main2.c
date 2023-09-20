@@ -15,7 +15,13 @@ void free_data_t(data_t *data)
 		if (data->environ && data->environ[i])
 			free(data->environ[i]);
 	}
+	for (i = 0; data->argv && data->argv[i]; i++)
+		free(data->argv[i]);
 
+	if (data->argv)
+		free(data->argv);
+	if (data->file_name)
+		free(data->file_name);
 	if (data->environ)
 		free(data->environ);
 	if (data->line)
