@@ -85,3 +85,33 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 	return (s);
 
 }
+
+/**
+ * _reallocdp - a function reallocate a memory block
+ * @ptr: pointer to pointer to reallocate
+ * @old_size: size of the allocated space of ptr
+ * @new_size: new size of the new block
+ * Return: pointer of pointer of newly allocated place
+ */
+char **_reallocdp(char **ptr, unsigned int old_size, unsigned int new_size)
+{
+	char **newptr;
+	unsigned int i;
+
+	if (ptr == NULL)
+		return (malloc(sizeof(char *) * new_size));
+
+	if (new_size == old_size)
+		return (ptr);
+
+	newptr = malloc(sizeof(char *) * new_size);
+	if (newptr == NULL)
+		return (NULL);
+
+	for (i = 0; i < old_size; i++)
+		newptr[i] = ptr[i];
+
+	free(ptr);
+
+	return (newptr);
+}

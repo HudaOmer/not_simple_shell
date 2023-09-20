@@ -33,7 +33,10 @@ void execute(data_t *data)
 				{
 					execution_status = execve(actual_command, data->argv, environ);
 					if (execution_status == -1)
-						perror("Error");
+					{
+						perror("Error"), data->status = 2;
+						return;
+					}
 				}
 				else
 				{

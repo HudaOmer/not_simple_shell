@@ -1,5 +1,23 @@
 #include "main.h"
 
+/**
+ * is_digit - checks if a string contains a non-digit char
+ * @s: string to be evaluated
+ *
+ * Return: 0 if a non-digit is found, 1 otherwise
+ */
+int is_digit(char *s)
+{
+	int i = 0;
+
+	while (s[i])
+	{
+		if (s[i] < '0' || s[i] > '9')
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 /**
  * no_of_digits - number of digits
@@ -99,23 +117,24 @@ char *exit_error(data_t *data)
  */
 int _exit_shell(data_t *data)
 {
-	int exit_status = 0;
-	char *error = NULL;
-	(void)error;
+	unsigned int ustatus;
+	int isdigit;
+	int str_len;
+	int big_number;
 
-	if (data->argv[1])
+	if (data->argv[1] != NULL)
 	{
-		exit_status = _erratoi(data->argv[1]);
-		if (exit_status == -1)
+		ustatus = _atoi(data->argv[1]);
+		isdigit = is_digit(data->argv[1]);
+		str_len = _strlen(data->argv[1]);
+		big_number = ustatus > (unsigned int)INT_MAX;
+		if (!isdigit || str_len > 10 || big_number)
 		{
+			get_error(data, 2);
 			data->status = 2;
-			error = exit_error(data);
-			write(STDERR_FILENO, error, _strlen(error));
 			return (1);
 		}
-		data->status = data->err_num = _erratoi(data->argv[1]);
-		return (-2);
+		data->status = (ustatus % 256);
 	}
-	data->err_num = -1;
-	exit(exit_status);
+	exit(data->status);
 }

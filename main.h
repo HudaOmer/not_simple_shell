@@ -109,7 +109,6 @@ typedef struct built_in
 } builtin_t;
 
 void my_shell(data_t *data, char **argv);
-int tokenization(data_t *data, char **argv);
 
 /* err_puts.c functions */
 void _eputs(char *);
@@ -136,15 +135,13 @@ char *_strncpy(char *, char *, int);
 char *_strncat(char *, char *, int);
 char *_strchr(char *, char);
 
-/* string_4.c functions */
-char **_strtow(char *str, char *d);
-char **_strtow2(char *str, char d);
 
 /* memory.c functions */
 char *_memset(char *s, char b, unsigned int n);
 void _freess(char **pp);
 int _freenull(void **p);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
+char **_reallocdp(char **ptr, unsigned int old_size, unsigned int new_size);
 
 /* functions.c functions */
 int interactive(data_t *data);
@@ -162,21 +159,7 @@ char *convert_number(long int num, int base, int flags);
 /* getline2.c functions */
 ssize_t get_line(char **lineptr, size_t *n, FILE *stream);
 
-/* data.c functions */
-void clear_data(data_t *data);
-void set_data(data_t *data, char **av);
-void free_data(data_t *data, int all);
 
-/* env.c functions */
-int print_env(data_t *data);
-int set_env(data_t *data, char *name, char *value, int overwrite);
-int _setenv(data_t *data);
-char *_getenv(data_t *data, const char *name);
-
-/* env2.c functions */
-int unset_env(data_t *data, char *name);
-int _unsetenv(data_t *data);
-int pop_env(data_t *data);
 
 /* file_io.c functions */
 char *get_history_file(data_t *data);
@@ -205,6 +188,52 @@ void chain_cont(data_t *, char *, size_t *, size_t, size_t);
 int replace_alias(data_t *);
 int replace_vars(data_t *);
 int replace_str(char **, char *);
+
+/* _strtok.c functions */
+char *_strtok(char str[], const char *delim);
+
+/* cd.c functions */
+int _cd_shell(data_t *data);
+
+/* cd_extra.c functions */
+void cd_dot(data_t *data);
+void cd_to(data_t *data);
+void cd_previous(data_t *data);
+void cd_to_home(data_t *data);
+
+
+
+/* env_1.c functions*/
+int cmp_env_name(const char *nenv, const char *name);
+char *_getenv(const char *name, char **_environ);
+int _env(data_t *data);
+int print_env(data_t *data);
+
+/* env_2.c functions */
+char *copy_info(char *name, char *value);
+void set_env(char *name, char *value, data_t *data);
+int _setenv(data_t *data);
+int _unsetenv(data_t *data);
+
+/* error_1.c functions */
+char *strcat_cd(data_t *data, char *msg, char *error, char *ver_str);
+char *error_get_cd(data_t *data);
+char *error_not_found(data_t *data);
+char *error_env(data_t *data);
+char *error_path_126(data_t *data);
+
+/* _geterroe.c */
+int get_error(data_t *data, int e_val);
+
+/* extra.c */
+void rev_string(char *s);
+
+char *error_exit_shell(data_t *data);
+
+
+/* exit.c */
+char *_itoa(int n);
+
 
 char *_getenv_var(const char *name);
 void get_sigint(int sig);

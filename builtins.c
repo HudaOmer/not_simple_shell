@@ -12,6 +12,7 @@ int is_builtin(data_t *data)
 		{ "exit", _exit_shell },
 		{ "setenv", _setenv},
 		{ "unsetenv", _unsetenv},
+		{ "cd", _cd_shell},
 		{ NULL, NULL }
 	};
 	int i;
