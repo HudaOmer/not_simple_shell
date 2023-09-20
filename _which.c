@@ -14,12 +14,12 @@ char *_which(char *command)
 	path = _getenv_var("PATH");
 	if (path)
 	{
-		path_copy = strdup(path);
-		command_length = strlen(command);
-		path_token = strtok(path_copy, ":");
+		path_copy = _strdup(path);
+		command_length = _strlen(command);
+		path_token = _strtok(path_copy, ":");
 		while (path_token != NULL)
 		{
-			directory_length = strlen(path_token);
+			directory_length = _strlen(path_token);
 			file_path = malloc(command_length + directory_length + 2);
 
 			_strcpy(file_path, path_token);
@@ -34,7 +34,7 @@ char *_which(char *command)
 			else
 			{
 				free(file_path);
-				path_token = strtok(NULL, ":");
+				path_token = _strtok(NULL, ":");
 			}
 		}
 		free(path_copy);
