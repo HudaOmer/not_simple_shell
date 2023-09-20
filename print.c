@@ -43,7 +43,7 @@ void print_error(data_t *data, char *err_str)
 {
 	write(STDERR_FILENO, data->file_name, _strlen(data->file_name));
 	write(STDERR_FILENO, ": ", 2);
-	write(STDERR_FILENO, data->line_count, 1);
+	write(STDERR_FILENO, _itoa(data->line_count), 1);
 	write(STDERR_FILENO, ": ", 2);
 	write(STDERR_FILENO, data->argv[0], _strlen(data->argv[0]));
 	write(STDERR_FILENO, ": ", 2);
