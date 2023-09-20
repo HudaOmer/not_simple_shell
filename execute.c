@@ -15,7 +15,7 @@ void execute(data_t *data)
 	{
 		command = data->argv[0];
 		actual_command = _which(command);
-		if (actual_command == NULL && isatty(STDIN_FILENO))
+		if (actual_command == NULL)
 		{
 			print_error(data, "not found\n");
 			data->status = 127;
