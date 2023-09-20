@@ -25,12 +25,10 @@ int tokenization(data_t *data, char **argv)
 	for (i = 0; token != NULL; i++)
 	{
 		data->argv[i] = malloc(sizeof(char) * _strlen(token));
-		strcpy(data->argv[i], token);
+		_strcpy(data->argv[i], token);
 		token = strtok(NULL, del);
 	}
 	data->argv[i] = NULL;
-	printarray(data->argv);
-	printf("t");
 	return (0);
 }
 
@@ -79,6 +77,7 @@ void my_shell(data_t *data, char **argv)
 		}
 		else if (all_space(data->line) == 1)
 		{
+			free(data->line);
 			data->line_count++;
 			continue;
 		}

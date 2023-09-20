@@ -60,6 +60,7 @@ int main(int argc, char **argv)
 {
 	int fd = 2;
 	data_t data[] = { DATA_INIT };
+	int ret_val = 0;
 
 	data->file_name = argv[0];
 	set_data_t(data, argv);
@@ -73,8 +74,12 @@ int main(int argc, char **argv)
 		}
 		data->readfd = fd;
 	}
+	signal(SIGINT, get_sigint);
 	my_shell(data, argv);
+	
+	ret_val = data->status;
+	
 	free_list(&(data->env));
 	free_data_t(data);
-	return (EXIT_SUCCESS);
+	return (ret_val);
 }

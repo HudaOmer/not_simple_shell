@@ -11,7 +11,7 @@ char *_which(char *command)
 	int command_length, directory_length;
 	struct stat buffer;
 
-	path = getenv("PATH");
+	path = _getenv_var("PATH");
 	if (path)
 	{
 		path_copy = strdup(path);
@@ -22,10 +22,10 @@ char *_which(char *command)
 			directory_length = strlen(path_token);
 			file_path = malloc(command_length + directory_length + 2);
 
-			strcpy(file_path, path_token);
-			strcat(file_path, "/");
-			strcat(file_path, command);
-			strcat(file_path, "\0");
+			_strcpy(file_path, path_token);
+			_strcat(file_path, "/");
+			_strcat(file_path, command);
+			_strcat(file_path, "\0");
 			if (stat(file_path, &buffer) == 0)
 			{
 				free(path_copy);

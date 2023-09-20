@@ -9,8 +9,7 @@ void execute(data_t *data)
 {
 	char *command = NULL, *actual_command = NULL;
 	pid_t child_pid;
-	int status;
-	int execution_status;
+	int status, execution_status;
 
 	if (data->argv)
 	{
@@ -19,6 +18,7 @@ void execute(data_t *data)
 		if (actual_command == NULL && isatty(STDIN_FILENO))
 		{
 			print_error(data, "not found\n");
+			data->status = 127;
 		}
 		else
 		{
@@ -32,10 +32,8 @@ void execute(data_t *data)
 				if (child_pid == 0)
 				{
 					execution_status = execve(actual_command, data->argv, environ);
-					if (execution_status == -1 && isatty(STDIN_FILENO))
-					{
+					if (execution_status == -1)
 						perror("Error");
-					};
 				}
 				else
 				{

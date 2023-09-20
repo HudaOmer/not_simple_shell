@@ -12,6 +12,7 @@
 #include <limits.h>
 #include <fcntl.h>
 #include <errno.h>
+#include <signal.h>
 
 /* for read/write */
 #define READ_BUF_SIZE 1024
@@ -205,6 +206,8 @@ int replace_alias(data_t *);
 int replace_vars(data_t *);
 int replace_str(char **, char *);
 
+char *_getenv_var(const char *name);
+void get_sigint(int sig);
 
 int is_builtin(data_t *data);
 char **split(char *string);
