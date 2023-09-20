@@ -13,11 +13,11 @@ int tokenization(data_t *data, char **argv)
 	int i, tokens = 0;
 	(void)argv;
 
-	token = strtok(data->line, del);
+	token = _strtok(data->line, del);
 	while (token != NULL)
 	{
 		tokens++;
-		token = strtok(NULL, del);
+		token = _strtok(NULL, del);
 	}
 	tokens++;
 	data->argv = malloc(sizeof(char *) * tokens);
